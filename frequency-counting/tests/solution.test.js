@@ -1,7 +1,26 @@
 import solution from "../src/modules/solution";
 
-describe("Name Challenge", () => {
-  test("Given an array with '[2,7,11,15]' elements and a target equals to '9' should be '[0,1]'", () => {
-    expect(solution([2, 7, 11, 15], 9)).toEqual([0, 1]);
+describe("Challenge: Frequency Counter", () => {
+  test("Given an array with numbers, it should return the frequency of each number", () => {
+    expect(solution([1, 2, 2, 3, 3, 3, 4, 4, 4, 4])).toEqual({
+      1: 1,
+      2: 2,
+      3: 3,
+      4: 4,
+    });
+  });
+
+  test("Given an array with strings, it should return the frequency of each string", () => {
+    expect(
+      solution(["apple", "banana", "apple", "orange", "banana", "apple"])
+    ).toEqual({
+      apple: 3,
+      banana: 2,
+      orange: 1,
+    });
+  });
+
+  test("Given an empty array, it should return an empty object", () => {
+    expect(solution([])).toEqual({});
   });
 });

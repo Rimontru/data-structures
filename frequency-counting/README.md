@@ -4,7 +4,7 @@
 
 [Easy](https://chatgpt.com/c/67d49a87-82ec-8013-92c0-62b106dd6da3)
 
-_Solved in NodeJS_
+Solved in NodeJS
 
 ## Content
 
