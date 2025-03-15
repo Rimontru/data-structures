@@ -21,3 +21,4 @@ It include logic challenges solved in NodeJS
 10. [tree-constructor](tree-constructor)
 11. [two-sum](two-sum) ✅
 12. [frequency-counting](frequency-counting) ✅
+13. [fibonacci-series](fibonacci-series) ✅
