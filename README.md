@@ -12,7 +12,7 @@ It include logic challenges solved in NodeJS
 1. [age-counting](age-counting) ✅
 2. [add-two-numbers](add-two-numbers) ✅
 3. [converts-string-number](converts-string-number) ✅
-4. [join-two-json](join-two-json)
+4. [join-two-json](join-two-json) ✅
 5. [json-cleaning](json-cleaning)
 6. [linked-lists](linked-lists) ✅
 7. [missing-number](missing-number) ✅
