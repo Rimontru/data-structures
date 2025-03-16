@@ -18,7 +18,8 @@ It include logic challenges solved in NodeJS
 7. [missing-number](missing-number) ✅
 8. [most-repeated-character](most-repeated-character) ✅
 9. [non-repeating-character](non-repeating-character) ✅
-10. [tree-constructor](tree-constructor)
+10. [tree-constructor](tree-constructor) ✅
 11. [two-sum](two-sum) ✅
 12. [frequency-counting](frequency-counting) ✅
 13. [fibonacci-series](fibonacci-series) ✅
+
