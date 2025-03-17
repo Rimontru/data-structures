@@ -22,4 +22,4 @@ It include logic challenges solved in NodeJS
 11. [two-sum](two-sum) ✅
 12. [frequency-counting](frequency-counting) ✅
 13. [fibonacci-series](fibonacci-series) ✅
-
+14. [palindrome-number](palindrome-number) ✅
