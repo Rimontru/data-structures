@@ -1,76 +1,84 @@
-// Definition for singly-linked list
-class ListNode {
-  // Constructor to initialize the ListNode
-  constructor(val, next) {
-    // Value of the ListNode
-    this.val = val === undefined ? 0 : val;
-    // Next pointer of the ListNode
-    this.next = next === undefined ? null : next;
+import { log } from "node:console";
+
+class Node {
+  // It represents each node from of list
+  constructor(value) {
+    this.value = value;
+    this.next = null; // point to next Element
+  }
+  // Node { value: x next: Node {} }
+}
+
+class LinkedList {
+  constructor() {
+    this.head = null;
+    this.tail = null;
+    this.size = 0;
+  }
+
+  add(value) {
+    // We'll create a new Node such as Node class
+    const newNode = new Node(value);
+    // Next, lets check if Head of list is null
+    if (this.head === null) {
+      this.head = newNode;
+      this.tail = newNode;
+    } else {
+      this.tail.next = newNode;
+      this.tail = newNode;
+    }
+
+    this.size++;
   }
 }
 
-// Helper function to create a linked list from an array
 const createLinkedList = (arr) => {
-  // lets initialize a ListNode with value 0
-  let dummy = new ListNode(0);
-  // lets initialize a current ListNode to dummy node
-  let current = dummy;
-  // iterate over the array and create a new ListNode for each element
-  for (const num of arr) {
-    // assign the next node to the current number
-    current.next = new ListNode(num);
-    // move the current node to the next node
-    current = current.next;
+  const list = new LinkedList();
+  for (const value of arr) {
+    list.add(value);
   }
-  // Return the dummy.next to skip the Zero node
-  return dummy.next;
+
+  return list.head || {};
 };
 
 const addTwoNumbers = (l1, l2) => {
-  // Create a dummy node to simplify the code
-  let dummy = new ListNode(0);
-  let current = dummy;
+  let total = 0;
   let carry = 0;
-  let lap = 0;
+  const list = new LinkedList();
 
-  // Traverse both linked lists
+  log("x", 1 % 10);
   while (l1 !== null || l2 !== null || carry !== 0) {
-    // Get the values of the current nodes (or 0 if the node is null)
-    const val1 = l1 ? l1.val : 0; //[2, 4, 3]
-    const val2 = l2 ? l2.val : 0; //[5, 6, 4]
+    const val1 = l1 ? l1.value : 0;
+    const val2 = l2 ? l2.value : 0;
 
-    // Calculate the sum and the new carry
-    const total = val1 + val2 + carry;
-    // Rule of 10, if the total is greater than 10, then the carry will be 1
-    carry = Math.floor(total / 10);
-    const digit = total % 10;
-    //console.log('lap', lap, 'total', total, 'carry', carry, 'digit', digit);
+    //log("aaa", Math.floor(10 / 10));
+    total = val1 + val2 + carry;
+    log(val1, val2, carry);
 
-    // Create a new node with the digit and move the current pointer
-    current.next = new ListNode(digit);
-    current = current.next;
+    log(total / 10);
+    carry = Math.floor(total / 10); // 18 / 10 = Math.floor(1.8) -> 1
+    const digit = total % 10; // 18 % 10 = 8
+    log("t", total, "d", digit);
+    list.add(digit);
 
-    // Move to the next nodes in the linked lists
-    if (l1) l1 = l1.next;
-    if (l2) l2 = l2.next;
-    lap++;
+    if (l1) l1 = l1.next; // We update to end bucle until will be null for both
+    if (l2) l2 = l2.next; // We update to end bucle until will be null for both
   }
 
-  // Return the result, skipping the dummy node
-  return dummy.next;
+  return list.head || {};
 };
 
-// Helper function to convert a linked list to an array
-function linkedListToArray(head) {
+const convertListToArray = (list) => {
   const result = [];
-  while (head !== null) {
-    result.push(head.val);
-    head = head.next;
+  while (list !== null) {
+    result.push(list.value);
+    list = list.next;
   }
   return result;
-}
+};
 
-const l1 = createLinkedList([9, 9, 9, 9, 9, 9, 9]);
-const l2 = createLinkedList([9, 9, 9, 9]);
-const result = addTwoNumbers(l1, l2);
-console.log(linkedListToArray(result));
+const l1 = createLinkedList([9, 9, 9, 9]); // 342
+const l2 = createLinkedList([9, 9, 9]); // 465
+const result = addTwoNumbers(l1, l2); // 807
+log(convertListToArray(result)); // [7,0,8]
+
