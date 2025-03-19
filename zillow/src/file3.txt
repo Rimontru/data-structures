@@ -1,0 +1,9 @@
+789
+St Louis
+MO
+1100
+400000
+House
+2
+/NewYork,NY/1100_sft
+/St Louis,MO/1100_sft

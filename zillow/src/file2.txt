@@ -1,0 +1,11 @@
+456
+Austin
+TX
+2100
+600000
+Condo
+4
+/SanFrancisco,CA/1230_2500_sft
+/SanFrancisco,CA/1400_1550_sft
+/SanFrancisco,CA/1550_sft
+/Austin,TX/2000_2500_sft
