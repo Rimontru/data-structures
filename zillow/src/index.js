@@ -1,23 +1,15 @@
-const { log } = require("node:console");
-const fs = require("node:fs");
+// Source: HackerRank
+// https://www.hackerrank.com/contests/zillow-engineering-coding-challenge/challenges/property-match
 
-/*
-  [
-    "/<propertyCity>,<propertyState>/<min_sft>_<max_sft>" min_sft <= propertySft <= max_sft
-    "/SanFrancisco,CA/1230_2500_sft/20000_30000_price"
-    "/SanFrancisco,CA/1400_1550_sft"
-    "/SanFrancisco,CA/1550_sft"
-    "/Austin,TX/2000_2500_sft"
-  ]
-  
-  // input001.txt
-  propertyId:    123
-  propertyCity:  SanFrancisco
-  propertyState: CA
-  propertySft:   1450
-  propertyPrice: 800000
-  propertyType:  Condo
-*/
+import fs from "node:fs";
+import { log } from "node:console";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// "/<propertyCity>,<propertyState>/<min_sft>_<max_sft>" min_sft <= propertySft <= max_sft
 
 function matchSavedSearch(
   propertyId,
@@ -28,21 +20,25 @@ function matchSavedSearch(
   propertyType,
   savedSearches
 ) {
-  let result = [];
+  const result = [];
+  const propertySftNum = parseInt(propertySft, 10);
+
   for (const search of savedSearches) {
-    const splited_search = search.trim().split("/");
-    const propertySft_input = splited_search[splited_search.length - 1];
-    const propertySft_splited = propertySft_input.split("_");
-    if (propertySft_splited.length === 3) {
-      if (
-        propertySft_splited[0] <= propertySft &&
-        propertySft_splited[1] >= propertySft
-      ) {
-        result.push(search);
-      }
-    } else if (propertySft_splited.length === 2) {
-      if (propertySft_splited[0] <= propertySft) {
-        result.push(search);
+    const [cityState, sftRange] = search.trim().split("/").slice(-2);
+    const [city, state] = cityState.split(",");
+    const sftParts = sftRange.split("_");
+
+    if (city === propertyCity && state === propertyState) {
+      if (sftParts.length === 3) {
+        const [minSft, maxSft] = sftParts.map(Number);
+        if (minSft <= propertySftNum && propertySftNum <= maxSft) {
+          result.push(search);
+        }
+      } else if (sftParts.length === 2) {
+        const minSft = parseInt(sftParts[0], 10);
+        if (minSft <= propertySftNum) {
+          result.push(search);
+        }
       }
     }
   }
@@ -50,27 +46,34 @@ function matchSavedSearch(
   return result;
 }
 
-for (var i = 1; i < 4; i++) {
-  const data = fs.readFileSync(`input00${i}.txt`, "utf8");
-  let [
-    propertyId,
-    propertyCity,
-    propertyState,
-    propertySft,
-    propertyPrice,
-    propertyType,
-    savedSearchCount,
-    ...savedSearches
-  ] = data.split("\n");
-  console.log(
-    matchSavedSearch(
+for (let i = 1; i < 4; i++) {
+  const filePath = path.join(__dirname, `input00${i}.txt`);
+  try {
+    const data = fs.readFileSync(filePath, "utf8");
+    const [
       propertyId,
       propertyCity,
       propertyState,
       propertySft,
       propertyPrice,
       propertyType,
-      savedSearches
-    )
-  );
+      savedSearchCount,
+      ...savedSearches
+    ] = data.split("\n");
+
+    log(
+      matchSavedSearch(
+        propertyId,
+        propertyCity,
+        propertyState,
+        propertySft,
+        propertyPrice,
+        propertyType,
+        savedSearches
+      )
+    );
+  } catch (error) {
+    console.error(`Error reading file input00${i}.txt:`, error.message);
+  }
 }
+
